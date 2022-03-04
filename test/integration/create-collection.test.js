@@ -12,8 +12,8 @@ const storeBasePath = './test/store/'
 describe('Store API', () => {
   describe('createCollection()', () => {
     it('should create a collection dir', () => {
-      let store = new KVPFileStore({ path: storeBasePath })
-      let collectionName = 'users1'
+      const store = new KVPFileStore({ path: storeBasePath })
+      const collectionName = 'users1'
 
       return store.createCollection(collectionName)
         .then(() => {
@@ -32,8 +32,8 @@ describe('Store API', () => {
 
   describe('createCollectionSync()', () => {
     it('should create a collection dir', () => {
-      let store = new KVPFileStore({ path: storeBasePath })
-      let collectionName = 'users2'
+      const store = new KVPFileStore({ path: storeBasePath })
+      const collectionName = 'users2'
 
       store.createCollectionSync(collectionName)
 

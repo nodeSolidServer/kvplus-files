@@ -22,12 +22,12 @@ function pathFor (collectionName, key) {
 }
 
 function collectionDirExists (collectionName) {
-  let collectionPath = pathFor(collectionName)
+  const collectionPath = pathFor(collectionName)
   return pathExists(collectionPath)
 }
 
 function fileExistsFor (collectionName, key) {
-  let filePath = pathFor(collectionName, key)
+  const filePath = pathFor(collectionName, key)
   return pathExists(filePath)
 }
 
@@ -46,12 +46,12 @@ function pathExists (relPath) {
 }
 
 function removeCollectionDir (collectionName) {
-  let collectionPath = pathFor(collectionName)
+  const collectionPath = pathFor(collectionName)
   return removePath(collectionPath)
 }
 
 function removeFileFor (collectionName, key) {
-  let filePath = pathFor(collectionName, key)
+  const filePath = pathFor(collectionName, key)
   return removePath(filePath)
 }
 

@@ -45,7 +45,7 @@ class KVPFileStore {
   createCollection (collectionName) {
     return Promise.resolve()
       .then(() => {
-        let collectionPath = this.absolutePathFor(collectionName)
+        const collectionPath = this.absolutePathFor(collectionName)
 
         return fsp.mkdirp(collectionPath)
       })
@@ -57,7 +57,7 @@ class KVPFileStore {
    * @param collectionName
    */
   createCollectionSync (collectionName) {
-    let collectionPath = this.absolutePathFor(collectionName)
+    const collectionPath = this.absolutePathFor(collectionName)
 
     fs.mkdirpSync(collectionPath)
   }
@@ -85,7 +85,7 @@ class KVPFileStore {
       .then(() => {
         this.validateKey(key)
 
-        let filePath = this.absolutePathFor(collectionName, key)
+        const filePath = this.absolutePathFor(collectionName, key)
 
         return this.fsRemove(filePath)
       })
@@ -133,7 +133,7 @@ class KVPFileStore {
   exists (collectionName, key) {
     return Promise.resolve()
       .then(() => {
-        let filePath = this.absolutePathFor(collectionName, key)
+        const filePath = this.absolutePathFor(collectionName, key)
 
         return fsp.access(filePath, fs.R_OK | fs.W_OK)
       })
@@ -165,7 +165,7 @@ class KVPFileStore {
       .then(() => {
         this.validateKey(key)
 
-        let filePath = this.absolutePathFor(collectionName, key)
+        const filePath = this.absolutePathFor(collectionName, key)
 
         return fsp.readFile(filePath)
       })
@@ -178,7 +178,7 @@ class KVPFileStore {
   }
 
   initCollections () {
-    for (let collectionName of this.collections) {
+    for (const collectionName of this.collections) {
       this.createCollectionSync(collectionName)
     }
   }
@@ -220,7 +220,7 @@ class KVPFileStore {
       .then(() => {
         this.validateKey(key)
 
-        let filePath = this.absolutePathFor(collectionName, key)
+        const filePath = this.absolutePathFor(collectionName, key)
 
         data = this.serialize(data)
 
