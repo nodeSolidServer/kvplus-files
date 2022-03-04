@@ -11,15 +11,15 @@ const KVPFileStore = require('../../src/store')
 describe('KVPFileStore', () => {
   describe('constructor()', () => {
     it('should initialize the store path', () => {
-      let options = { path: './test' }
+      const options = { path: './test' }
 
-      let store = new KVPFileStore(options)
+      const store = new KVPFileStore(options)
 
       expect(store.path).to.equal('./test')
     })
 
     it('should init default values', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(store.path).to.equal(KVPFileStore.DEFAULT_PATH)
       expect(store.filePrefix).to.equal(KVPFileStore.DEFAULT_FILE_PREFIX)
@@ -27,7 +27,7 @@ describe('KVPFileStore', () => {
     })
 
     it('should set a default serialize function', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(store.serialize('test string')).to.equal('"test string"')
 
@@ -35,7 +35,7 @@ describe('KVPFileStore', () => {
     })
 
     it('should set a default deserialize function', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(store.deserialize('"test string"')).to.equal('test string')
 
@@ -45,7 +45,7 @@ describe('KVPFileStore', () => {
 
   describe('fileNameFor()', () => {
     it('should construct a file name from a given key', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(store.fileNameFor('alice')).to.equal('_key_alice.json')
     })
@@ -53,7 +53,7 @@ describe('KVPFileStore', () => {
 
   describe('relativePathFor()', () => {
     it('should return a relative filename path for a given key', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(store.relativePathFor('users', 'alice'))
         .to.equal('db/users/_key_alice.json')
@@ -62,10 +62,10 @@ describe('KVPFileStore', () => {
 
   describe('absolutePathFor()', () => {
     it('should return an absolute filename path for a given key', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
-      let relativePath = store.relativePathFor('users', 'alice')
-      let absolutePath = store.absolutePathFor('users', 'alice')
+      const relativePath = store.relativePathFor('users', 'alice')
+      const absolutePath = store.absolutePathFor('users', 'alice')
 
       expect(absolutePath.endsWith(relativePath)).to.be.true()
       expect(absolutePath.length > relativePath.length).to.be.true()
@@ -74,7 +74,7 @@ describe('KVPFileStore', () => {
 
   describe('remove', () => {
     it('should validate collection name and key', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       store.fsRemove = sinon.stub().resolves()
 
@@ -89,10 +89,10 @@ describe('KVPFileStore', () => {
     })
 
     it('returns false if file does not exist', () => {
-      let fileError = new Error('File does not exist')
+      const fileError = new Error('File does not exist')
       fileError.code = 'ENOENT'
 
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       store.fsRemove = sinon.stub().throws(fileError)
 
@@ -103,7 +103,7 @@ describe('KVPFileStore', () => {
     })
 
     it('throws any other errors encountered', done => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       store.remove('users', null)
         .catch(err => {
@@ -115,7 +115,7 @@ describe('KVPFileStore', () => {
 
   describe('del()', () => {
     it('serves as an alias for remove()', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       store.remove = sinon.stub().resolves()
 
@@ -128,7 +128,7 @@ describe('KVPFileStore', () => {
 
   describe('validateCollection()', () => {
     it('should throw an error on a blank collection name', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(() => store.validateCollection(null))
         .to.throw(/Collection name cannot be empty/)
@@ -137,7 +137,7 @@ describe('KVPFileStore', () => {
 
   describe('validateKey()', () => {
     it('should throw an error on a blank key', () => {
-      let store = new KVPFileStore()
+      const store = new KVPFileStore()
 
       expect(() => store.validateKey(null))
         .to.throw(/Key cannot be empty/)
@@ -146,8 +146,8 @@ describe('KVPFileStore', () => {
 
   describe('initCollections()', () => {
     it('creates collections given in constructor', () => {
-      let collections = [ 'users', 'posts' ]
-      let store = new KVPFileStore({ collections })
+      const collections = ['users', 'posts']
+      const store = new KVPFileStore({ collections })
 
       store.createCollectionSync = sinon.stub()
 
