@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "babel src -d lib",
-    "prepublish": "npm test && npm run build",
+    "prepublishOnly": "npm test && npm run build",
     "standard": "standard",
     "mocha": "nyc mocha ./test/**/*.js",
     "test": "npm run standard && npm run mocha"
